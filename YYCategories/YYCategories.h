@@ -9,7 +9,7 @@
 //  LICENSE file in the root directory of this source tree.
 //
 
-#import <UIKit/UIKit.h>
+#import <Foundation/Foundation.h>
 
 #if __has_include(<YYCategories/YYCategories.h>)
 FOUNDATION_EXPORT double YYCategoriesVersionNumber;
@@ -29,7 +29,9 @@ FOUNDATION_EXPORT const unsigned char YYCategoriesVersionString[];
 #import <YYCategories/NSTimer+YYAdd.h>
 #import <YYCategories/NSBundle+YYAdd.h>
 #import <YYCategories/NSThread+YYAdd.h>
-#import <YYCategories/UIColor+YYAdd.h>
+#import <YYCategories/YYColor+YYAdd.h>
+
+#if TARGET_OS_IPHONE
 #import <YYCategories/UIImage+YYAdd.h>
 #import <YYCategories/UIControl+YYAdd.h>
 #import <YYCategories/UIBarButtonItem+YYAdd.h>
@@ -45,7 +47,10 @@ FOUNDATION_EXPORT const unsigned char YYCategoriesVersionString[];
 #import <YYCategories/UIBezierPath+YYAdd.h>
 #import <YYCategories/CALayer+YYAdd.h>
 #import <YYCategories/YYCGUtilities.h>
+#endif
+
 #else
+
 #import "YYCategoriesMacro.h"
 #import "NSObject+YYAdd.h"
 #import "NSObject+YYAddForKVO.h"
@@ -61,7 +66,9 @@ FOUNDATION_EXPORT const unsigned char YYCategoriesVersionString[];
 #import "NSTimer+YYAdd.h"
 #import "NSBundle+YYAdd.h"
 #import "NSThread+YYAdd.h"
-#import "UIColor+YYAdd.h"
+#import "YYColor+YYAdd.h"
+
+#if TARGET_OS_IPHONE
 #import "UIImage+YYAdd.h"
 #import "UIControl+YYAdd.h"
 #import "UIBarButtonItem+YYAdd.h"
@@ -77,5 +84,7 @@ FOUNDATION_EXPORT const unsigned char YYCategoriesVersionString[];
 #import "UIBezierPath+YYAdd.h"
 #import "CALayer+YYAdd.h"
 #import "YYCGUtilities.h"
+#endif
+
 #endif
 

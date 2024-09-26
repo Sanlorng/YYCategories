@@ -1,5 +1,5 @@
 //
-//  UIColor+YYAdd.h
+//  YYColor+YYAdd.h
 //  YYCategories <https://github.com/ibireme/YYCategories>
 //
 //  Created by ibireme on 13/4/4.
@@ -9,7 +9,16 @@
 //  LICENSE file in the root directory of this source tree.
 //
 
+#import <Foundation/Foundation.h>
+
+#if TARGET_OS_IPHONE
 #import <UIKit/UIKit.h>
+#define YYColor UIColor
+#else
+#import <Cocoa/Cocoa.h>
+#define YYColor NSColor
+#endif
+
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -39,18 +48,18 @@ extern void YY_HSL2HSB(CGFloat h, CGFloat s, CGFloat l,
 
 
 /*
- Create UIColor with a hex string.
- Example: UIColorHex(0xF0F), UIColorHex(66ccff), UIColorHex(#66CCFF88)
+ Create YYColor with a hex string.
+ Example: YYColorHex(0xF0F), YYColorHex(66ccff), YYColorHex(#66CCFF88)
  
  Valid format: #RGB #RGBA #RRGGBB #RRGGBBAA 0xRGB ...
  The `#` or "0x" sign is not required.
  */
-#ifndef UIColorHex
-#define UIColorHex(_hex_)   [UIColor colorWithHexString:((__bridge NSString *)CFSTR(#_hex_))]
+#ifndef YYColorHex
+#define YYColorHex(_hex_)   [YYColor colorWithHexString:((__bridge NSString *)CFSTR(#_hex_))]
 #endif
 
 /**
- Provide some method for `UIColor` to convert color between
+ Provide some method for `YYColor` to convert color between
  RGB,HSB,HSL,CMYK and Hex.
 
  | Color space | Meaning                                |
@@ -69,12 +78,12 @@ extern void YY_HSL2HSB(CGFloat h, CGFloat s, CGFloat l,
  If you want convert color between more color space (CIEXYZ,Lab,YUV...),
  see https://github.com/ibireme/yy_color_convertor
  */
-@interface UIColor (YYAdd)
+@interface YYColor (YYAdd)
 
 
-#pragma mark - Create a UIColor Object
+#pragma mark - Create a YYColor Object
 ///=============================================================================
-/// @name Creating a UIColor Object
+/// @name Creating a YYColor Object
 ///=============================================================================
 
 /**
@@ -96,7 +105,7 @@ extern void YY_HSL2HSB(CGFloat h, CGFloat s, CGFloat l,
  @return           The color object. The color information represented by this 
                    object is in the device RGB colorspace.
  */
-+ (UIColor *)colorWithHue:(CGFloat)hue
++ (YYColor *)colorWithHue:(CGFloat)hue
                saturation:(CGFloat)saturation
                 lightness:(CGFloat)lightness
                     alpha:(CGFloat)alpha;
@@ -123,7 +132,7 @@ extern void YY_HSL2HSB(CGFloat h, CGFloat s, CGFloat l,
  @return        The color object. The color information represented by this 
                 object is in the device RGB colorspace.
  */
-+ (UIColor *)colorWithCyan:(CGFloat)cyan
++ (YYColor *)colorWithCyan:(CGFloat)cyan
                    magenta:(CGFloat)magenta
                     yellow:(CGFloat)yellow
                      black:(CGFloat)black
@@ -137,7 +146,7 @@ extern void YY_HSL2HSB(CGFloat h, CGFloat s, CGFloat l,
  @return          The color object. The color information represented by this
                   object is in the device RGB colorspace.
  */
-+ (UIColor *)colorWithRGB:(uint32_t)rgbValue;
++ (YYColor *)colorWithRGB:(uint32_t)rgbValue;
 
 /**
  Creates and returns a color object using the hex RGBA color values.
@@ -147,7 +156,7 @@ extern void YY_HSL2HSB(CGFloat h, CGFloat s, CGFloat l,
  @return           The color object. The color information represented by this 
                    object is in the device RGB colorspace.
  */
-+ (UIColor *)colorWithRGBA:(uint32_t)rgbaValue;
++ (YYColor *)colorWithRGBA:(uint32_t)rgbaValue;
 
 /**
  Creates and returns a color object using the specified opacity and RGB hex value.
@@ -160,7 +169,7 @@ extern void YY_HSL2HSB(CGFloat h, CGFloat s, CGFloat l,
  @return          The color object. The color information represented by this 
                   object is in the device RGB colorspace.
  */
-+ (UIColor *)colorWithRGB:(uint32_t)rgbValue alpha:(CGFloat)alpha;
++ (YYColor *)colorWithRGB:(uint32_t)rgbValue alpha:(CGFloat)alpha;
 
 /**
  Creates and returns a color object from hex string.
@@ -175,9 +184,9 @@ extern void YY_HSL2HSB(CGFloat h, CGFloat s, CGFloat l,
  
  @param hexStr  The hex string value for the new color.
  
- @return        An UIColor object from string, or nil if an error occurs.
+ @return        An YYColor object from string, or nil if an error occurs.
  */
-+ (nullable UIColor *)colorWithHexString:(NSString *)hexStr;
++ (nullable YYColor *)colorWithHexString:(NSString *)hexStr;
 
 /**
  Creates and returns a color object by add new color.
@@ -186,7 +195,7 @@ extern void YY_HSL2HSB(CGFloat h, CGFloat s, CGFloat l,
  
  @param blendMode  add color blend mode
  */
-- (UIColor *)colorByAddColor:(UIColor *)add blendMode:(CGBlendMode)blendMode;
+- (YYColor *)colorByAddColor:(YYColor *)add blendMode:(CGBlendMode)blendMode;
 
 /**
  Creates and returns a color object by change components.
@@ -203,7 +212,7 @@ extern void YY_HSL2HSB(CGFloat h, CGFloat s, CGFloat l,
  @param alphaDelta       the alpha change delta specified as a value 
                          from -1.0 to 1.0. 0 means no change.
  */
-- (UIColor *)colorByChangeHue:(CGFloat)hueDelta
+- (YYColor *)colorByChangeHue:(CGFloat)hueDelta
                    saturation:(CGFloat)saturationDelta
                    brightness:(CGFloat)brightnessDelta
                         alpha:(CGFloat)alphaDelta;

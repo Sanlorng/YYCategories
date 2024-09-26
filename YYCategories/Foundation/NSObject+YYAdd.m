@@ -249,13 +249,24 @@ return @(ret); \
                 } else if (strcmp(type, @encode(NSRange)) == 0) {
                     NSRange arg = va_arg(args, NSRange);
                     [inv setArgument:&arg atIndex:index];
-                } else if (strcmp(type, @encode(UIOffset)) == 0) {
+                } 
+                
+#if TARGET_OS_IPHONE
+                else if (strcmp(type, @encode(UIOffset)) == 0) {
                     UIOffset arg = va_arg(args, UIOffset);
                     [inv setArgument:&arg atIndex:index];
                 } else if (strcmp(type, @encode(UIEdgeInsets)) == 0) {
                     UIEdgeInsets arg = va_arg(args, UIEdgeInsets);
                     [inv setArgument:&arg atIndex:index];
-                } else {
+                }
+#else
+                else if (strcmp(type, @encode(NSEdgeInsets)) == 0) {
+                    NSEdgeInsets arg = va_arg(args, NSEdgeInsets);
+                    [inv setArgument:&arg atIndex:index];
+                }
+#endif
+                
+                else {
                     unsupportedType = YES;
                 }
             } break;

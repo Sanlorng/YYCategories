@@ -9,7 +9,15 @@
 //  LICENSE file in the root directory of this source tree.
 //
 
+#import <Foundation/Foundation.h>
+
+#if TARGET_OS_IPHONE
 #import <UIKit/UIKit.h>
+typedef UIFont YYFont;
+#else
+#import <Cocoa/Cocoa.h>
+typedef NSFont YYFont;
+#endif
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -158,7 +166,7 @@ NS_ASSUME_NONNULL_BEGIN
  @return              The width and height of the resulting string's bounding box.
  These values may be rounded up to the nearest whole number.
  */
-- (CGSize)sizeForFont:(UIFont *)font size:(CGSize)size mode:(NSLineBreakMode)lineBreakMode;
+- (CGSize)sizeForFont:(YYFont *)font size:(CGSize)size mode:(NSLineBreakMode)lineBreakMode;
 
 /**
  Returns the width of the string if it were to be rendered with the specified
@@ -169,7 +177,7 @@ NS_ASSUME_NONNULL_BEGIN
  @return      The width of the resulting string's bounding box. These values may be
  rounded up to the nearest whole number.
  */
-- (CGFloat)widthForFont:(UIFont *)font;
+- (CGFloat)widthForFont:(YYFont *)font;
 
 /**
  Returns the height of the string if it were rendered with the specified constraints.
@@ -182,7 +190,7 @@ NS_ASSUME_NONNULL_BEGIN
  @return       The height of the resulting string's bounding box. These values
  may be rounded up to the nearest whole number.
  */
-- (CGFloat)heightForFont:(UIFont *)font width:(CGFloat)width;
+- (CGFloat)heightForFont:(YYFont *)font width:(CGFloat)width;
 
 
 #pragma mark - Regular Expression

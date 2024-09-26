@@ -1,5 +1,5 @@
 //
-//  UIColor+YYAdd.m
+//  YYColor+YYAdd.m
 //  YYCategories <https://github.com/ibireme/YYCategories>
 //
 //  Created by ibireme on 13/4/4.
@@ -9,11 +9,11 @@
 //  LICENSE file in the root directory of this source tree.
 //
 
-#import "UIColor+YYAdd.h"
+#import "YYColor+YYAdd.h"
 #import "NSString+YYAdd.h"
 #import "YYCategoriesMacro.h"
 
-YYSYNTH_DUMMY_CLASS(UIColor_YYAdd)
+YYSYNTH_DUMMY_CLASS(YYColor_YYAdd)
 
 
 #define CLAMP_COLOR_VALUE(v) (v) = (v) < 0 ? 0 : (v) > 1 ? 1 : (v)
@@ -197,42 +197,42 @@ void YY_HSL2HSB(CGFloat h, CGFloat s, CGFloat l,
     }
 }
 
-@implementation UIColor (YYAdd)
+@implementation YYColor (YYAdd)
 
-+ (UIColor *)colorWithHue:(CGFloat)hue
++ (YYColor *)colorWithHue:(CGFloat)hue
                saturation:(CGFloat)saturation
                 lightness:(CGFloat)lightness
                     alpha:(CGFloat)alpha {
     CGFloat r, g, b;
     YY_HSL2RGB(hue, saturation, lightness, &r, &g, &b);
-    return [UIColor colorWithRed:r green:g blue:b alpha:alpha];
+    return [YYColor colorWithRed:r green:g blue:b alpha:alpha];
 }
-+ (UIColor *)colorWithCyan:(CGFloat)cyan
++ (YYColor *)colorWithCyan:(CGFloat)cyan
                    magenta:(CGFloat)magenta
                     yellow:(CGFloat)yellow
                      black:(CGFloat)black
                      alpha:(CGFloat)alpha {
     CGFloat r, g, b;
     YY_CMYK2RGB(cyan, magenta, yellow, black, &r, &g, &b);
-    return [UIColor colorWithRed:r green:g blue:b alpha:alpha];
+    return [YYColor colorWithRed:r green:g blue:b alpha:alpha];
 }
 
-+ (UIColor *)colorWithRGB:(uint32_t)rgbValue {
-    return [UIColor colorWithRed:((rgbValue & 0xFF0000) >> 16) / 255.0f
++ (YYColor *)colorWithRGB:(uint32_t)rgbValue {
+    return [YYColor colorWithRed:((rgbValue & 0xFF0000) >> 16) / 255.0f
                            green:((rgbValue & 0xFF00) >> 8) / 255.0f
                             blue:(rgbValue & 0xFF) / 255.0f
                            alpha:1];
 }
 
-+ (UIColor *)colorWithRGBA:(uint32_t)rgbaValue {
-    return [UIColor colorWithRed:((rgbaValue & 0xFF000000) >> 24) / 255.0f
++ (YYColor *)colorWithRGBA:(uint32_t)rgbaValue {
+    return [YYColor colorWithRed:((rgbaValue & 0xFF000000) >> 24) / 255.0f
                            green:((rgbaValue & 0xFF0000) >> 16) / 255.0f
                             blue:((rgbaValue & 0xFF00) >> 8) / 255.0f
                            alpha:(rgbaValue & 0xFF) / 255.0f];
 }
 
-+ (UIColor *)colorWithRGB:(uint32_t)rgbValue alpha:(CGFloat)alpha {
-    return [UIColor colorWithRed:((rgbValue & 0xFF0000) >> 16) / 255.0f
++ (YYColor *)colorWithRGB:(uint32_t)rgbValue alpha:(CGFloat)alpha {
+    return [YYColor colorWithRed:((rgbValue & 0xFF0000) >> 16) / 255.0f
                            green:((rgbValue & 0xFF00) >> 8) / 255.0f
                             blue:(rgbValue & 0xFF) / 255.0f
                            alpha:alpha];
@@ -298,7 +298,7 @@ static BOOL hexStrToRGBA(NSString *str,
 + (instancetype)colorWithHexString:(NSString *)hexStr {
     CGFloat r, g, b, a;
     if (hexStrToRGBA(hexStr, &r, &g, &b, &a)) {
-        return [UIColor colorWithRed:r green:g blue:b alpha:a];
+        return [YYColor colorWithRed:r green:g blue:b alpha:a];
     }
     return nil;
 }
@@ -334,7 +334,7 @@ static BOOL hexStrToRGBA(NSString *str,
     return hex;
 }
 
-- (UIColor *)colorByAddColor:(UIColor *)add blendMode:(CGBlendMode)blendMode {
+- (YYColor *)colorByAddColor:(YYColor *)add blendMode:(CGBlendMode)blendMode {
     CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceRGB();
     CGBitmapInfo bitmapInfo = kCGImageAlphaPremultipliedLast | kCGBitmapByteOrder32Big;
     uint8_t pixel[4] = { 0 };
@@ -346,14 +346,18 @@ static BOOL hexStrToRGBA(NSString *str,
     CGContextFillRect(context, CGRectMake(0, 0, 1, 1));
     CGContextRelease(context);
     CGColorSpaceRelease(colorSpace);
-    return [UIColor colorWithRed:pixel[0] / 255.0f green:pixel[1] / 255.0f blue:pixel[2] / 255.0f alpha:pixel[3] / 255.0f];
+    return [YYColor colorWithRed:pixel[0] / 255.0f green:pixel[1] / 255.0f blue:pixel[2] / 255.0f alpha:pixel[3] / 255.0f];
 }
 
-- (UIColor *)colorByChangeHue:(CGFloat)h saturation:(CGFloat)s brightness:(CGFloat)b alpha:(CGFloat)a {
+- (YYColor *)colorByChangeHue:(CGFloat)h saturation:(CGFloat)s brightness:(CGFloat)b alpha:(CGFloat)a {
     CGFloat hh, ss, bb, aa;
+#if TARGET_OS_IPHONE
     if (![self getHue:&hh saturation:&ss brightness:&bb alpha:&aa]) {
         return self;
     }
+#else
+    [self getHue:&hh saturation:&ss brightness:&bb alpha:&aa];
+#endif
     hh += h;
     ss += s;
     bb += b;
@@ -363,7 +367,7 @@ static BOOL hexStrToRGBA(NSString *str,
     ss = ss < 0 ? 0 : ss > 1 ? 1 : ss;
     bb = bb < 0 ? 0 : bb > 1 ? 1 : bb;
     aa = aa < 0 ? 0 : aa > 1 ? 1 : aa;
-    return [UIColor colorWithHue:hh saturation:ss brightness:bb alpha:aa];
+    return [YYColor colorWithHue:hh saturation:ss brightness:bb alpha:aa];
 }
 
 - (BOOL)getHue:(CGFloat *)hue
@@ -371,9 +375,15 @@ static BOOL hexStrToRGBA(NSString *str,
      lightness:(CGFloat *)lightness
          alpha:(CGFloat *)alpha {
     CGFloat r, g, b, a;
+    
+#if TARGET_OS_IPHONE
     if (![self getRed:&r green:&g blue:&b alpha:&a]) {
         return NO;
     }
+#else
+    [self getRed:&r green:&g blue:&b alpha:&a];
+#endif
+    
     YY_RGB2HSL(r, g, b, hue, saturation, lightness);
     *alpha = a;
     return YES;
@@ -385,9 +395,15 @@ static BOOL hexStrToRGBA(NSString *str,
           black:(CGFloat *)black
           alpha:(CGFloat *)alpha {
     CGFloat r, g, b, a;
+    
+#if TARGET_OS_IPHONE
     if (![self getRed:&r green:&g blue:&b alpha:&a]) {
         return NO;
     }
+#else
+    [self getRed:&r green:&g blue:&b alpha:&a];
+#endif
+    
     YY_RGB2CMYK(r, g, b, cyan, magenta, yellow, black);
     *alpha = a;
     return YES;

@@ -9,7 +9,12 @@
 //  LICENSE file in the root directory of this source tree.
 //
 
+#if TARGET_OS_IPHONE
 #import <UIKit/UIKit.h>
+#else
+#import <Cocoa/Cocoa.h>
+#endif
+
 #import <sys/time.h>
 #import <pthread.h>
 
