@@ -9,6 +9,10 @@
 //  LICENSE file in the root directory of this source tree.
 //
 
+#import <Foundation/Foundation.h>
+
+#if TARGET_OS_IPHONE
+
 #import "UIView+YYAdd.h"
 #import <QuartzCore/QuartzCore.h>
 #import "YYCategoriesMacro.h"
@@ -270,3 +274,5 @@ YYSYNTH_DUMMY_CLASS(UIView_YYAdd)
 }
 
 @end
+
+#endif

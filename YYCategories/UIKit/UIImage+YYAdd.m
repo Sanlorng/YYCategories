@@ -9,6 +9,10 @@
 //  LICENSE file in the root directory of this source tree.
 //
 
+#import <Foundation/Foundation.h>
+
+#if TARGET_OS_IPHONE
+
 #import "UIImage+YYAdd.h"
 #import "UIDevice+YYAdd.h"
 #import "NSString+YYAdd.h"
@@ -750,3 +754,5 @@ static void _yy_cleanupBuffer(void *userData, void *buf_data) {
 }
 
 @end
+
+#endif

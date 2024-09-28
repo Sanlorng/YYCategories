@@ -9,6 +9,10 @@
 //  LICENSE file in the root directory of this source tree.
 //
 
+#import <Foundation/Foundation.h>
+
+#if TARGET_OS_IPHONE
+
 #import "UITextField+YYAdd.h"
 #import "YYCategoriesMacro.h"
 
@@ -31,3 +35,5 @@ YYSYNTH_DUMMY_CLASS(UITextField_YYAdd)
 }
 
 @end
+
+#endif

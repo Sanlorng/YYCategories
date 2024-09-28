@@ -9,6 +9,10 @@
 //  LICENSE file in the root directory of this source tree.
 //
 
+#import <Foundation/Foundation.h>
+
+#if TARGET_OS_IPHONE
+
 #import <UIKit/UIKit.h>
 
 NS_ASSUME_NONNULL_BEGIN
@@ -33,3 +37,5 @@ NS_ASSUME_NONNULL_BEGIN
 @end
 
 NS_ASSUME_NONNULL_END
+
+#endif

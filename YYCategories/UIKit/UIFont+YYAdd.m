@@ -9,6 +9,10 @@
 //  LICENSE file in the root directory of this source tree.
 //
 
+#import <Foundation/Foundation.h>
+
+#if TARGET_OS_IPHONE
+
 #import "UIFont+YYAdd.h"
 #import "YYCategoriesMacro.h"
 
@@ -270,3 +274,5 @@ static uint32_t CalcTableCheckSum(const uint32_t *table, uint32_t numberOfBytesI
 @end
 
 #pragma clang diagnostic pop
+
+#endif

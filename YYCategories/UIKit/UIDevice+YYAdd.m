@@ -9,6 +9,10 @@
 //  LICENSE file in the root directory of this source tree.
 //
 
+#import <Foundation/Foundation.h>
+
+#if TARGET_OS_IPHONE
+
 #import "UIDevice+YYAdd.h"
 #include <sys/socket.h>
 #include <sys/sysctl.h>
@@ -514,3 +518,5 @@ static yy_net_interface_counter yy_get_net_interface_counter() {
 }
 
 @end
+
+#endif

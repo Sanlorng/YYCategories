@@ -9,6 +9,10 @@
 //  LICENSE file in the root directory of this source tree.
 //
 
+#import <Foundation/Foundation.h>
+
+#if TARGET_OS_IPHONE
+
 #import <UIKit/UIKit.h>
 #import <QuartzCore/QuartzCore.h>
 
@@ -328,3 +332,5 @@ static inline UIEdgeInsets UIEdgeInsetPixelCeil(UIEdgeInsets insets) {
 #endif
 
 NS_ASSUME_NONNULL_END
+
+#endif

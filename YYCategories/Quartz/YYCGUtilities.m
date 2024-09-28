@@ -9,6 +9,10 @@
 //  LICENSE file in the root directory of this source tree.
 //
 
+#import <Foundation/Foundation.h>
+
+#if TARGET_OS_IPHONE
+
 #import "YYCGUtilities.h"
 #import <Accelerate/Accelerate.h>
 #import "UIView+YYAdd.h"
@@ -269,3 +273,5 @@ CGRect YYCGRectFitWithContentMode(CGRect rect, CGSize size, UIViewContentMode mo
     }
     return rect;
 }
+
+#endif

@@ -3,14 +3,9 @@
 
 import PackageDescription
 
-var exclude = ["Foundation/NSObject+YYAddForARC.m", "Foundation/NSThread+YYAdd.m"]
-#if os(macOS)
-exclude.append(contentsOf: ["Quartz", "UIKit"])
-#endif
-
 let package = Package(
     name: "YYCategories",
-    platforms: [.iOS(.v8), .macOS(.v10_11)],
+    platforms: [.macOS(.v10_11), .iOS(.v8)],
     products: [
         // Products define the executables and libraries a package produces, making them visible to other packages.
         .library(
@@ -18,13 +13,10 @@ let package = Package(
             targets: ["YYCategories"]),
     ],
     targets: [
-        // Targets are the basic building blocks of a package, defining a module or a test suite.
-        // Targets can depend on other targets in this package and products from dependencies.
         .target(
             name: "YYCategories",
             path: "YYCategories",
-            exclude: exclude,
-            sources: ["."],
+            exclude: ["Foundation/NSObject+YYAddForARC.m", "Foundation/NSThread+YYAdd.m"],
             publicHeadersPath: "include",
             cSettings: [
                 .headerSearchPath("Foundation", .when(platforms: [.iOS, .macOS])),
@@ -34,6 +26,7 @@ let package = Package(
             ],
             linkerSettings: [
                 .linkedFramework("UIKit", .when(platforms: [.iOS])),
+                .linkedFramework("Cocoa", .when(platforms: [.macOS])),
                 .linkedFramework("CoreFoundation"),
                 .linkedFramework("QuartzCore"),
                 .linkedFramework("CoreGraphics"),
@@ -43,7 +36,6 @@ let package = Package(
                 .linkedFramework("Accelerate"),
                 .linkedLibrary("z")
             ]
-        ),
-    ],
-    swiftLanguageVersions: [.v5]
+        )
+    ]
 )

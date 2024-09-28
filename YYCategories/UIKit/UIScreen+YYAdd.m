@@ -9,6 +9,10 @@
 //  LICENSE file in the root directory of this source tree.
 //
 
+#import <Foundation/Foundation.h>
+
+#if TARGET_OS_IPHONE
+
 #import "UIScreen+YYAdd.h"
 #import "YYCategoriesMacro.h"
 #import "UIDevice+YYAdd.h"
@@ -173,3 +177,5 @@ YYSYNTH_DUMMY_CLASS(UIScreen_YYAdd);
 }
 
 @end
+
+#endif

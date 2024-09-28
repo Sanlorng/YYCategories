@@ -9,6 +9,10 @@
 //  LICENSE file in the root directory of this source tree.
 //
 
+#import <Foundation/Foundation.h>
+
+#if TARGET_OS_IPHONE
+
 #import "CALayer+YYAdd.h"
 #import "YYCategoriesMacro.h"
 #import "YYCGUtilities.h"
@@ -322,3 +326,5 @@ YYSYNTH_DUMMY_CLASS(CALayer_YYAdd)
 }
 
 @end
+
+#endif

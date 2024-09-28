@@ -9,6 +9,10 @@
 //  LICENSE file in the root directory of this source tree.
 //
 
+#import <Foundation/Foundation.h>
+
+#if TARGET_OS_IPHONE
+
 #import "UIBezierPath+YYAdd.h"
 #import "UIFont+YYAdd.h"
 #import <CoreText/CoreText.h>
@@ -62,3 +66,5 @@ YYSYNTH_DUMMY_CLASS(UIBezierPath_YYAdd)
 }
 
 @end
+
+#endif

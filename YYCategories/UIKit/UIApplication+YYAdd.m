@@ -9,6 +9,10 @@
 //  LICENSE file in the root directory of this source tree.
 //
 
+#import <Foundation/Foundation.h>
+
+#if TARGET_OS_IPHONE
+
 #import "UIApplication+YYAdd.h"
 #import "NSArray+YYAdd.h"
 #import "NSObject+YYAdd.h"
@@ -237,3 +241,5 @@ YYSYNTH_DYNAMIC_PROPERTY_OBJECT(networkActivityInfo, setNetworkActivityInfo, RET
 }
 
 @end
+
+#endif

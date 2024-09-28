@@ -9,6 +9,10 @@
 //  LICENSE file in the root directory of this source tree.
 //
 
+#import <Foundation/Foundation.h>
+
+#if TARGET_OS_IPHONE
+
 #import "UIGestureRecognizer+YYAdd.h"
 #import "YYCategoriesMacro.h"
 #import <objc/runtime.h>
@@ -76,3 +80,5 @@ static const int block_key;
 }
 
 @end
+
+#endif
